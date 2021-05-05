@@ -79,14 +79,11 @@ let listaProductos = [producto1, producto2, producto3, producto4];
 
 function Verdureria(listaProductos) {
     this.listaProductos = listaProductos;
-    let ganancia = 0;
     this.calcularGananciaReduce = function () {
-        this.listaProductos.reduce((acum, producto) => {
-            if (acum !== undefined) {
-                ganancia = ganancia + (acum.precio * acum.cantidadVendida) + (producto.cantidadVendida * producto.precio);
-            } else {
-                ganancia = ganancia + (producto.cantidadVendida * producto.precio);
-            }
+        let ganancia = this.listaProductos.map((producto)=>{
+            return producto.cantidadVendida * producto.precio
+        }).reduce((acum, producto) => {
+           return acum += producto;          
         });
         return ganancia
     };
@@ -98,12 +95,12 @@ function Verdureria(listaProductos) {
         return ganancia
     };
     this.buscarProducto = function (nombre) {
-        let producto = this.listaProductos.filter(
+        let producto = this.listaProductos.find(
             (elemento) => {
                 return elemento.nombre === nombre
             }
         );
-        return producto[0]
+        return producto
     };
     this.venderMasQue = function (valor) {
         let productos = this.listaProductos.filter(
@@ -118,7 +115,7 @@ function Verdureria(listaProductos) {
         producto.precio = valor;
     };
     this.calcularGananciaTotal = function () {
-        return this.calcularGananciaEach() * 0.55
+        return this.calcularGananciaReduce() * 0.55
     }
 }
 
@@ -130,7 +127,7 @@ console.log(verdureria1.buscarProducto('Limon'));
 
 console.log(verdureria1.venderMasQue(1300));
 console.log(verdureria1.buscarProducto('Limon'));
-console.log(verdureria1.cambiarPrecio('Limon', 400));
+verdureria1.cambiarPrecio('Limon', 400);
 console.log(verdureria1.buscarProducto('Limon'));
 console.log(verdureria1.calcularGananciaReduce());
 console.log(verdureria1.calcularGananciaTotal());
