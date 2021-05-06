@@ -1,5 +1,4 @@
 const fs = require('fs');
-const { connect } = require('http2');
 // utilizando el modulo leo el json clases 
 let departamentosJSON = fs.readFileSync('./departamentos.json','utf-8');
 // parseo el string con el json a un array de objetos
