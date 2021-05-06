@@ -83,8 +83,14 @@ function Verdureria(listaProductos) {
         let ganancia = this.listaProductos.map((producto)=>{
             return producto.cantidadVendida * producto.precio
         }).reduce((acum, producto) => {
-           return acum += producto;          
+            return acum + producto          
         });
+        return ganancia
+    };
+    this.calcularGananciaReduce2 = function () {
+        let ganancia = this.listaProductos.reduce((acum, producto) => {
+            return acum + producto.precio * producto.cantidadVendida
+        }, 0);
         return ganancia
     };
     this.calcularGananciaEach = function () {
@@ -129,5 +135,5 @@ console.log(verdureria1.venderMasQue(1300));
 console.log(verdureria1.buscarProducto('Limon'));
 verdureria1.cambiarPrecio('Limon', 400);
 console.log(verdureria1.buscarProducto('Limon'));
-console.log(verdureria1.calcularGananciaReduce());
+console.log(verdureria1.calcularGananciaReduce2(), '*****************');
 console.log(verdureria1.calcularGananciaTotal());
